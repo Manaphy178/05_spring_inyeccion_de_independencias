@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- aqui decimos que objetos tiene el contenedor de spring -->
+	<!-- Asi defino un objeto y le asigno valores a sus propiedades dandole 
+		los siguientes valores basicos -->
+	<bean id="miDs" class="datasources.DataSource">
+		<!-- cuando llamamos a property hay que indicar el nombre de la propiedad 
+			al que le vamos a dar un valor por el atributo value cada una de las siguientes 
+			lineas, esta llamando realmente al setter de la propiedad -->
+		<property name="url" value="jdbc://localhost" />
+		<property name="user" value="root" />
+		<property name="pass" value="" />
+		<property name="nombre_bd" value="bd_tienda" />
+	</bean>
+	<!-- en la siguiente linea de nuevo vuelvo a crear un objeto -->
+	<bean id="dao" class="daosImpl.AnunciosDAOImpl">
+		<!-- de nuevo asigno un valor a una propiedad del objeto -->
+		<property name="maxAnunciosPortada" value="5" />
+		<!-- Otra vez asigno un valor a una propiedad, pero esta vez, no le asigno 
+			un tipo basico (int,String,etc) sino otro objeto ya creado, en este caso 
+			la bean de id miDs creada un poco mas arriba -->
+		<property name="miDataSource" ref="miDs" />
+	</bean>
+
+</beans>
